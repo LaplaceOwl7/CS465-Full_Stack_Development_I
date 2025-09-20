@@ -1,0 +1,19 @@
+{{> header}}
+<div id="contents">
+  <div class="box">
+    <div class="body">
+      <h1>{{title}}</h1>
+      <ul class="room-list">
+        {{#each rooms}}
+          <li>
+            <img src="/images/{{image}}" alt="{{title}}">
+            <h2>{{title}}</h2>
+            <p><strong>Price:</strong> {{price}}</p>
+            <p>{{description}}</p>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{> footer}}

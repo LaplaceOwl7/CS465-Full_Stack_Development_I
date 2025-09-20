@@ -1,0 +1,20 @@
+[
+  {
+    "title": "First Class Room",
+    "price": "220 / Day",
+    "description": "Cras dui sapien, feugiat vitae tristique ut, lobortis tempor orci. Donec pulvinar sagittis metus ut tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas idios.",
+    "image": "first-class.jpg"
+  },
+  {
+    "title": "Deluxe Room",
+    "price": "150 / Day",
+    "description": "Sed et augue lorem. In sit amet placerat arcu. Mauris volutpat ipsum ac justo mollis vel vestibulum orci gravida. Vestibulum sit amet porttitor odio. Nulla facilisi. Fusce at pretium felis.",
+    "image": "deluxe.jpg"
+  },
+  {
+    "title": "Suite Room",
+    "price": "180 / Day",
+    "description": "Sed et augue lorem. In sit amet placerat arcu. Mauris volutpat ipsum ac justo mollis vel vestibulum orci gravida. Vestibulum sit amet porttitor odio. Nulla facilisi. Fusce at pretium felis.",
+    "image": "suite.jpg"
+  }
+]
