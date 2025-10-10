@@ -34,8 +34,80 @@ const tripsFindByCode = async (req, res) => {
   }
 };
 
+// POST: /trips – Adds a new Trip
+// Regardless of outcome, response must include HTTP status code
+// and JSON message to the requesting client
+const tripsAddTrip = async(req, res) => {
+  const newTrip = new Trip({
+    code: req.body.code,
+    name: req.body.name,
+    length: req.body.length,
+    start: req.body.start,
+    resort: req.body.resort,
+    perPerson: req.body.perPerson,
+    image: req.body.image,
+    description: req.body.description
+  });
+
+  const q = await newTrip.save();
+  if (!q) {
+    // Database returned no data
+    return res
+      .status(400)
+      .json(err);
+  } else {
+    // Return new trip
+    return res
+      .status(201)
+      .json(q);
+  }
+
+  // Uncomment the following line to show results of operation
+  // on the console
+  console.log(q);
+};
+
+// PUT: /trips/:tripCode – Updates a Trip
+// Regardless of outcome, response must include HTTP status code and JSON message to the requesting client
+const tripsUpdateTrip = async (req, res) => {
+  // Debugging logs (optional)
+  console.log(req.params);
+  console.log(req.body);
+
+  try {
+    const q = await Model.findOneAndUpdate(
+      { code: req.params.tripCode },
+      {
+        code: req.body.code,
+        name: req.body.name,
+        length: req.body.length,
+        start: req.body.start,
+        resort: req.body.resort,
+        perPerson: req.body.perPerson,
+        image: req.body.image,
+        description: req.body.description
+      },
+      { new: true } // Return updated document
+    ).exec();
+
+    if (!q) {
+      // Database returned no result
+      return res.status(404).json({ message: 'Trip not found' });
+    }
+
+    // Return the updated trip
+    return res.status(200).json(q);
+  } catch (err) {
+    console.error('Error updating trip:', err);
+    return res.status(500).json({ message: 'Server error', error: err.toString() });
+  }
+
+  // Note: console.log(q) here is unreachable
+};
 
 module.exports = {
     tripsList,
-    tripsFindByCode
+    tripsFindByCode,
+    tripsAddTrip,
+    tripsUpdateTrip
 };

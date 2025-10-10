@@ -9,7 +9,12 @@ const indexRouter = require('./app_server/routes/index');
 const usersRouter = require('./app_server/routes/users');
 const travelRouter = require('./app_server/routes/travel');
 const roomRouter = require('./app_server/routes/rooms');
+const apiRouter = require('./app_api/routes/index');
+
 var handlebars = require('hbs');
+
+// Request the database:
+require('./app_api/models/db');
 
 var app = express();
 
@@ -27,10 +32,20 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Enable CORS
+app.use('/api', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    next();
+});
+
+
 app.use('/', indexRouter);          // GET /  -> renders index.hbs
 app.use('/users', usersRouter);     // /users/*
 app.use('/travel', travelRouter);   // GET /travel -> renders travel.hbs
-app.use('/rooms', roomRouter) // Get Room router
+app.use('/rooms', roomRouter); // Get Room router
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
