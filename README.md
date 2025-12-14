@@ -1,5 +1,4 @@
 # CS465: Full Stack Development I
-## C
 
 ## What is this?
 
